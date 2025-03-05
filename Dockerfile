@@ -4,7 +4,8 @@ FROM ubuntu:latest
 RUN apt-get update && apt-get install -y \
     curl \
     bash \
-    inotify-tools
+    inotify-tools \
+    tree
 
 # Instalar NVM
 ENV NVM_DIR /root/.nvm
