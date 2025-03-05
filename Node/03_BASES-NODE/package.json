@@ -1,8 +1,8 @@
 {
   "name": "03_bases-node",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Es una tabla de multiplicar y cración de archivo de texto con el resultado",
-  "main": "app2.js",
+  "main": "app3.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "base10": "node app2 --base=10"
@@ -10,6 +10,7 @@
   "author": "Bruno Ortiz",
   "license": "MIT",
   "dependencies": {
-    "colors": "^1.0.0"
+    "colors": "^1.0.0",
+    "yargs": "^17.7.2"
   }
 }
