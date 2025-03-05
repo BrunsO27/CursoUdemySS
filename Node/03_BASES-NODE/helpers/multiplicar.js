@@ -1,6 +1,7 @@
 const fs = require ('fs');
 const { resolve } = require('path');
 
+//Mi solucion:
 /* const crearArchivo = ( base = 5) => {
 
     console.log('====================================================');
@@ -20,10 +21,9 @@ const { resolve } = require('path');
     fs.writeFileSync(`tabla${base}.txt`, salida);
 
     console.log(`Archivo tabla${base}.txt creado con exito`);
-} */
+}*/
 
-//Mi solucion:
-/* const crearTablaMultiplicar = ( base = 5 ) => {
+/*const crearTablaMultiplicar = ( base = 5 ) => {
     console.log('====================================================');
 
     console.log('TABLA DEL', base);
@@ -55,23 +55,27 @@ const crearArchivo = (base) => {
 
 //Solucion del instructor:
 
-const crearArchivo = async( base = 5) => {
+const crearArchivo = async( base = 5, listar = false) => {
 
     try {
-        console.log('====================================================');
+        /* console.log('====================================================');
 
         console.log('TABLA DEL', base);
 
         console.log('====================================================');
+        */
 
-
-        let salida = '';
+        let salida = '==================================================== \n' + 
+                      `TABLA DEL ${base} \n`+  
+                     '==================================================== \n' 
         for (let i = 1; i <= 10; i++) {
             salida += `${base} x ${i} = ${base * i} \n`;
         }
 
-        console.log(salida)
-
+        if (listar) {
+            console.log(salida)    
+        }
+    
         fs.writeFileSync(`tabla${base}.txt`, salida);
 
         return `tabla-${ base }.txt`;
