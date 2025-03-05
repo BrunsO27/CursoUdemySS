@@ -55,7 +55,7 @@ const crearArchivo = (base) => {
 
 //Solucion del instructor:
 
-const crearArchivo = async( base = 5, listar = false) => {
+const crearArchivo = async( base = 5, listar = false, hasta = 10) => {
 
     try {
         /* console.log('====================================================');
@@ -68,7 +68,7 @@ const crearArchivo = async( base = 5, listar = false) => {
         let salida = '==================================================== \n' + 
                       `TABLA DEL ${base} \n`+  
                      '==================================================== \n' 
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i <= hasta; i++) {
             salida += `${base} x ${i} = ${base * i} \n`;
         }
 
