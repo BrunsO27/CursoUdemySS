@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  node-exercises:
+    build: .
+    container_name: node_exercises
+    volumes:
+      - ./:/app  # Monta todas las carpetas dentro de Capitulos en /app
+    working_dir: /app  # Establece /app como el directorio de trabajo
+    stdin_open: true
+    tty: true
