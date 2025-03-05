@@ -2,7 +2,7 @@
   "name": "03_bases-node",
   "version": "0.0.3",
   "description": "Es una tabla de multiplicar y cración de archivo de texto con el resultado",
-  "main": "app4.js",
+  "main": "app5.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "base10": "node app2 --base=10"
