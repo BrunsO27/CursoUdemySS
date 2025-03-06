@@ -3,3 +3,6 @@
 
 #Ignora el directorio node_modules.
 node_modules/
+
+
+**/db/data.json
