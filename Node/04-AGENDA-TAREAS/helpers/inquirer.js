@@ -1,16 +1,27 @@
 const inquirer = require('inquirer');
 require('colors');
 
-const menuOpts = [
-    
-]
+const preguntas = [
+    {
+        type: 'list',
+        name: 'opcion',
+        message: 'Que desea hacer?',
+        choices: ['opt1', 'opt2', 'opt3']
+    }
+];
 
-const inquirerMenu = async() => {
+const inquirerMenu = async () => {
     
     console.clear();
     console.log('============================='.magenta);
     console.log('    Selecciona una opcion    '.magenta);
     console.log('============================= \n'.magenta);
 
-    await inquirer.promt([]) 
+    const opt = await inquirer.prompt(preguntas); 
+
+    return opt;
+}
+
+module.exports = {
+    inquirerMenu
 }

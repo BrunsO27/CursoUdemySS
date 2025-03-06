@@ -1,6 +1,6 @@
 {
   "name": "04-agenda-tareas",
-  "version": "0.0.1.0",
+  "version": "0.0.1.1",
   "description": "",
   "main": "app.js",
   "scripts": {
@@ -11,6 +11,6 @@
   "license": "MIT",
   "dependencies": {
     "colors": "^1.4.0",
-    "inquirer": "^12.4.2"
+    "inquirer": "^8.2.4"
   }
 }
