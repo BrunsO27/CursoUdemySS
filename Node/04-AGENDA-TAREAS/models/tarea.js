@@ -6,9 +6,9 @@ class Tarea {
     completadoEn = null;
 
     constructor( descipcion) {
-        this.id = uuidv4()
+        this.id = uuidv4();
         this.descipcion = descipcion;
-        this.completadoEn = null
+        this.completadoEn = null;
     }
 }
 
