@@ -1,5 +1,6 @@
 require('colors');
 
+const { guardarDB } = require('./helpers/guardarArchivo');
 const { inquirerMenu, 
         pausa,
         leerInput } = require('./helpers/inquirer');
@@ -17,7 +18,7 @@ const main = async() => {
 
         switch (opt) {
             case '1':
-                const descipcion = await leerInput('Descripcion');
+                const descipcion = await leerInput('Descripcion:');
                 tareas.crearTarea(descipcion);
             break;
 
@@ -25,6 +26,8 @@ const main = async() => {
                 console.log( tareas.listado );
             break;
         }
+
+        //guardarDB( tareas.listado);
 
         await pausa();
 
