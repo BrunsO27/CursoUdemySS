@@ -5,7 +5,8 @@ const { guardarDB,
  } = require('./helpers/guardarArchivo');
 const { inquirerMenu, 
         pausa,
-        leerInput } = require('./helpers/inquirer');
+        leerInput, 
+        listadoTareaABorrar} = require('./helpers/inquirer');
 const Tareas = require('./models/tareas');
 
 
@@ -50,6 +51,11 @@ const main = async() => {
                 //Solucion del instructor
                 /* tareas.listarPendientesCompletadas(false); */
             break;
+
+            case '6':
+                const id = await listadoTareaABorrar( tareas.listado );
+                console.log(id)
+            break
         }
 
         guardarDB( tareas.listado);

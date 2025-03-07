@@ -5,7 +5,7 @@ const Tarea = require("./tarea");
 
 /**
  * _listado:
- * {'uuid-12345-123456789-2: { id:12, descipcion, completadoEN:20250505'}
+ * {'uuid-12345-123456789-2: { id:12, descripcion, completadoEN:20250505'}
  */
 
 
@@ -16,10 +16,16 @@ class Tareas {
         this._listado = {};
     }
 
-    crearTarea (descipcion = '') {
-        const tarea = new Tarea(descipcion);
+    crearTarea (descripcion = '') {
+        const tarea = new Tarea(descripcion);
 
         this._listado[tarea.id] = tarea;
+    }
+
+    borrarTarea(id = ''){
+        if ( this._listado[id]) {
+            delete this._listado[id];
+        }
     }
 
     cargarTareasFromArray ( tareas = [] ) {
@@ -34,23 +40,23 @@ class Tareas {
         let contador = 0
         Object.keys(this._listado).forEach( key => {
             contador++;
-            const { descipcion, completadoEn} = this._listado[key];
+            const { descripcion, completadoEn} = this._listado[key];
 
             if (completadoEn !== null) {
-                console.log(`${colors.magenta(contador + '.')} ${colors.green(descipcion)}`);
+                console.log(`${colors.magenta(contador + '.')} ${colors.green(descripcion)}`);
             } else {
-                console.log(`${colors.magenta(contador + '.')} ${colors.red(descipcion)}`);
+                console.log(`${colors.magenta(contador + '.')} ${colors.red(descripcion)}`);
             }
         });
 
         //Solucion del instructor
         /*this.listado.forEach( (tarea,i) => {
         const idx = `${i + 1}.`.magenta;
-        const { descipcion, completadoEn } = tarea;
+        const { descripcion, completadoEn } = tarea;
         const estado = ( completadoEn )
                             ? 'Completada'.green
                             : 'Pendiente'.red;
-        console.log(`${idx} ${descipcion} :: ${estado}`);
+        console.log(`${idx} ${descripcion} :: ${estado}`);
         }); */
     }
 
@@ -61,10 +67,10 @@ class Tareas {
         let contador = 0;
         Object.keys(this._listado).forEach( key => {
             contador++;
-            const { descipcion, completadoEn} = this._listado[key];
+            const { descripcion, completadoEn} = this._listado[key];
 
             if ( completadoEn === null) {
-                console.log(`${colors.magenta(contador + '.')} ${colors.red(descipcion)}`);
+                console.log(`${colors.magenta(contador + '.')} ${colors.red(descripcion)}`);
             }
         });
     }
@@ -76,10 +82,10 @@ class Tareas {
         let contador = 0;
         Object.keys(this._listado).forEach( key => {
             contador++;
-            const { descipcion, completadoEn} = this._listado[key];
+            const { descripcion, completadoEn} = this._listado[key];
 
             if ( completadoEn !== null) {
-                console.log(`${colors.magenta(contador + '.')} ${colors.green(descipcion)} :: Se completo en ${completadoEn.toString().white}`);
+                console.log(`${colors.magenta(contador + '.')} ${colors.green(descripcion)} :: Se completo en ${completadoEn.toString().white}`);
             }
         });
     }
@@ -91,7 +97,7 @@ class Tareas {
         let c = 0;
         this.listado.forEach( (tarea,i) => {
             
-            const { descipcion, completadoEn } = tarea;
+            const { descripcion, completadoEn } = tarea;
             const estado = ( completadoEn )
                                 ? 'Completada'.green
                                 : 'Pendiente'.red;
@@ -100,12 +106,12 @@ class Tareas {
                 // mostrar compltadas
                 if (completadoEn) {
                     c++;
-                    console.log(`${ (c + '.').magenta} ${descipcion} :: ${completadoEn}`);
+                    console.log(`${ (c + '.').magenta} ${descripcion} :: ${completadoEn}`);
                 }
             } else {
                 if (!completadoEn) {
                     c++;
-                    console.log(`${ (c + '.').magenta}. ${descipcion} :: ${estado}`);
+                    console.log(`${ (c + '.').magenta}. ${descripcion} :: ${estado}`);
                 }
             }
             

@@ -2,14 +2,14 @@ const { v4: uuidv4 } = require('uuid')
 
 class Tarea {
     id = '';
-    descipcion = '';
+    descripcion = '';
     completadoEn = null;
 
-    constructor( descipcion) {
+    constructor( descripcion) {
         this.id = uuidv4();
-        this.descipcion = descipcion;
+        this.descripcion = descripcion;
         this.completadoEn = null;
     }
 }
 
-module.exports = Tarea
+module.exports = Tarea;
