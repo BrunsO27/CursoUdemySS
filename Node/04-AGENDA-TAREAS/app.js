@@ -32,6 +32,24 @@ const main = async() => {
             case '2':
                 tareas.listadoCompleto();
             break;
+
+            case '3':
+
+                //Mi solucion
+                tareas.listadoCompletadas();
+
+                //Solucion del instructor
+                /* tareas.listarPendientesCompletadas(true); */
+            break;
+
+            case '4':
+
+                //Mi solucion
+                tareas.listadoPendiente();
+
+                //Solucion del instructor
+                /* tareas.listarPendientesCompletadas(false); */
+            break;
         }
 
         guardarDB( tareas.listado);
