@@ -89,11 +89,17 @@ const leerInput = async( message ) => {
 
 const listadoTareaABorrar = async (tareas = []) => {
     const choices = tareas.map( (tarea, i) => {
-        const idx = `${i + 1}`.magenta
+        const idx = `${i + 1}.`.magenta
         return {
             value: tarea.id,
             name: `${idx}. ${tarea.descripcion}`
         }
+    });
+
+    //unshift agrega un 'objeto' al arreglo
+    choices.unshift({
+        value: '0',
+        name: '0.'.magenta + ' Cancelar'
     });
 
     const preguntas = [
@@ -110,9 +116,25 @@ const listadoTareaABorrar = async (tareas = []) => {
     return id;
 }
 
+const confirmar = async(mensaje) => {
+
+    const question = [
+        {
+            type: 'confirm',
+            name: 'OK',
+            message: mensaje
+        }
+    ];
+
+    const { OK } = await inquirer.prompt(question);
+    
+    return OK;
+}
+
 module.exports = {
     inquirerMenu,
     pausa,
     leerInput,
-    listadoTareaABorrar
+    listadoTareaABorrar,
+    confirmar
 }
