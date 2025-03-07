@@ -56,9 +56,9 @@ const main = async() => {
 
             case '5':
                 const ids = await listarTareasACompletar(tareas.listado);
-                console.log(ids);
+                tareas.toggleCompletadas( ids );
             break;
-            
+
             case '6':
                 const id = await listadoTareaABorrar( tareas.listado );
                 if (id !== '0') {

@@ -28,6 +28,25 @@ class Tareas {
         }
     }
 
+    toggleCompletadas( ids = []) {
+        ids.forEach( id => {
+            const tarea = this._listado[id];
+            if ( !tarea.completadoEn ) {
+                tarea.completadoEn = new Date().toISOString()
+            }
+        });
+
+        this.listado.forEach( tarea => {
+            if ( !ids.includes( tarea.id) ) {
+                // Otra forma de acceder al atributo
+                /* const tarea = this._listado[id];
+                tarea.completadoEn = null; */
+
+                this._listado[tarea.id].completadoEn = null
+            }
+        });
+    }
+
     cargarTareasFromArray ( tareas = [] ) {
         tareas.forEach (tarea => {
             this._listado[tarea.id] = tarea;
