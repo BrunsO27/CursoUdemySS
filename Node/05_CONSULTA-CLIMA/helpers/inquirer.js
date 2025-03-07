@@ -9,33 +9,17 @@ const preguntas = [
         message: '¿Qué desea hacer?',
         choices: [
             {
-                value: '1',
-                name: `${'1.'.magenta} Crear tarea`
+                value: 1,
+                name: `${'1.'.blue} Buscar ciudad`
             },
             {
-                value: '2',
-                name: `${'2.'.magenta} Listar tareas`
+                value: 2,
+                name: `${'2.'.blue} Historial`
             },
             {
-                value: '3',
-                name: `${'3.'.magenta} Listar tareas completadas`
-            },
-            {
-                value: '4',
-                name: `${'4.'.magenta} Listar tareas pendientes`
-            },
-            {
-                value: '5',
-                name: `${'5.'.magenta} Completar tarea(s)`
-            },
-            {
-                value: '6',
-                name: `${'6.'.magenta} Borrar tarea`
-            },
-            {
-                value: '0',
-                name: `${'0.'.magenta} Salir`
-            },
+                value: 0,
+                name: `${'0.'.blue} Salir`
+            }
         ]
     }
 ];
@@ -43,9 +27,9 @@ const preguntas = [
 const inquirerMenu = async () => {
     
     console.clear();
-    console.log('============================='.magenta);
-    console.log('    Selecciona una opcion    '.magenta);
-    console.log('============================= \n'.magenta);
+    console.log('============================='.blue);
+    console.log('    Selecciona una opcion    '.blue);
+    console.log('============================= \n'.blue);
 
     const { opcion } = await inquirer.prompt(preguntas); 
 
@@ -58,7 +42,7 @@ const pausa = async() => {
         {
             type: 'input',
             name: 'enter',
-            message: `Presione ${'ENTER'.magenta} para continuar`
+            message: `Presione ${'ENTER'.blue} para continuar`
         }
     ]
 
@@ -89,7 +73,7 @@ const leerInput = async( message ) => {
 
 const listadoTareaABorrar = async (tareas = []) => {
     const choices = tareas.map( (tarea, i) => {
-        const idx = `${i + 1}.`.magenta
+        const idx = `${i + 1}.`.blue
         return {
             value: tarea.id,
             name: `${idx}. ${tarea.descripcion}`
@@ -99,7 +83,7 @@ const listadoTareaABorrar = async (tareas = []) => {
     //unshift agrega un 'objeto' al arreglo
     choices.unshift({
         value: '0',
-        name: '0.'.magenta + ' Cancelar'
+        name: '0.'.blue + ' Cancelar'
     });
 
     const preguntas = [
@@ -118,7 +102,7 @@ const listadoTareaABorrar = async (tareas = []) => {
 
 const listarTareasACompletar = async(tareas = []) => {
     const choices = tareas.map( (tarea, i) => {
-        const idx = `${i + 1}.`.magenta
+        const idx = `${i + 1}.`.blue
         return {
             value: tarea.id,
             name: ` ${idx}. ${tarea.descripcion}`,
