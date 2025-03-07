@@ -10,15 +10,15 @@ const preguntas = [
         choices: [
             {
                 value: 1,
-                name: `${'1.'.blue} Buscar ciudad`
+                name: `${'1.'.brightYellow} Buscar ciudad`
             },
             {
                 value: 2,
-                name: `${'2.'.blue} Historial`
+                name: `${'2.'.brightYellow} Historial`
             },
             {
                 value: 0,
-                name: `${'0.'.blue} Salir`
+                name: `${'0.'.brightYellow} Salir`
             }
         ]
     }
@@ -27,9 +27,9 @@ const preguntas = [
 const inquirerMenu = async () => {
     
     console.clear();
-    console.log('============================='.blue);
-    console.log('    Selecciona una opcion    '.blue);
-    console.log('============================= \n'.blue);
+    console.log('============================='.brightYellow);
+    console.log('    Selecciona una opcion    '.white);
+    console.log('============================= \n'.brightYellow);
 
     const { opcion } = await inquirer.prompt(preguntas); 
 
@@ -42,7 +42,7 @@ const pausa = async() => {
         {
             type: 'input',
             name: 'enter',
-            message: `Presione ${'ENTER'.blue} para continuar`
+            message: `Presione ${'ENTER'.brightYellow} para continuar`
         }
     ]
 
@@ -73,7 +73,7 @@ const leerInput = async( message ) => {
 
 const listadoTareaABorrar = async (tareas = []) => {
     const choices = tareas.map( (tarea, i) => {
-        const idx = `${i + 1}.`.blue
+        const idx = `${i + 1}.`.brightYellow
         return {
             value: tarea.id,
             name: `${idx}. ${tarea.descripcion}`
@@ -83,7 +83,7 @@ const listadoTareaABorrar = async (tareas = []) => {
     //unshift agrega un 'objeto' al arreglo
     choices.unshift({
         value: '0',
-        name: '0.'.blue + ' Cancelar'
+        name: '0.'.brightYellow + ' Cancelar'
     });
 
     const preguntas = [
@@ -102,7 +102,7 @@ const listadoTareaABorrar = async (tareas = []) => {
 
 const listarTareasACompletar = async(tareas = []) => {
     const choices = tareas.map( (tarea, i) => {
-        const idx = `${i + 1}.`.blue
+        const idx = `${i + 1}.`.brightYellow
         return {
             value: tarea.id,
             name: ` ${idx}. ${tarea.descripcion}`,
