@@ -9,11 +9,21 @@ class Busquedas {
 
     async ciudad( lugar = '') {
         // peticion http
-        //console.log('ciudad', lugar);
 
         try {
-            const resp = await axios.get('https://reqres.in/api/users?page=2');
-            console.log(resp.data.per_page);
+            const instnace = axios.create({
+                baseURL: `https://api.mapbox.com/search/geocode/v6/forward?`,
+                params: {
+                    'q': lugar,
+                    'limit': 5,
+                    'language': 'es',
+                    'access_token': ''
+                }
+            });
+            
+            console.log(lugars)
+            const resp = await instnace.get();
+            console.log(resp.data);
 
             return []; // regresar los lugares    
         } catch (error) {
