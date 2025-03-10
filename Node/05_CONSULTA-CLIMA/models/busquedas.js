@@ -27,9 +27,14 @@ class Busquedas {
 
             const resp = await instance.get();
             //const resp = await axios.get('https://api.mapbox.com/search/geocode/v6/forward?q=jalisco&limit=5&language=es&access_token=pk.eyJ1IjoiYnVsazAyMDAiLCJhIjoiY203emJsazF2MGcxMzJpb2oxa2JvbXBxYiJ9.kR1-C3PTZfT4FEr7NR2uNA');
-            console.log(JSON.stringify(resp.data, null, 2));
-
-            return []; // regresar los lugares    
+            //console.log(JSON.stringify(resp.data, null, 2));
+            return resp.data.features.map( lugar => ({
+                id: lugar.id,
+                nombre: lugar.properties.full_address,
+                lng: lugar.geometry.coordinates[0],
+                lat: lugar.geometry.coordinates[1]
+            }))
+ 
         } catch (error) {
             return [];
         }
