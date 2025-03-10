@@ -7,3 +7,9 @@ node_modules/
 #Ignora el arhcivo data.json donde se guardan las tareas
 #de la app AGENDA-TAREAS
 **/db/data.json
+
+#Ignora el archivo db.jon donde se guarda el historial
+#de las busquedas de la app CONSULTA-CLIMA
+**/DB/db.json
+#Ignora las variables de entorno
+**/.env
