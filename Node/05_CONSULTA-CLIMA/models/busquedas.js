@@ -15,6 +15,14 @@ class Busquedas {
         }
     }
 
+    get paramsOpenWeather() {
+        return {
+            'appid': process.env.OPENWEATHER_KEY,
+            'units': 'metric',
+            'lang': 'es'
+        }
+    }
+
     async ciudad( lugar = '') {
         // peticion http
 
@@ -26,8 +34,6 @@ class Busquedas {
             });
 
             const resp = await instance.get();
-            //const resp = await axios.get('https://api.mapbox.com/search/geocode/v6/forward?q=jalisco&limit=5&language=es&access_token=pk.eyJ1IjoiYnVsazAyMDAiLCJhIjoiY203emJsazF2MGcxMzJpb2oxa2JvbXBxYiJ9.kR1-C3PTZfT4FEr7NR2uNA');
-            //console.log(JSON.stringify(resp.data, null, 2));
             return resp.data.features.map( lugar => ({
                 id: lugar.id,
                 nombre: lugar.properties.full_address,
@@ -37,10 +43,29 @@ class Busquedas {
  
         } catch (error) {
             return [];
-        }
+        }        
+    }
+    
+    async climaLugar( lat, lon ){
+        try {
+            // instance axios.create()
+            const instance = axios.create({
+                baseURL: `https://api.openweathermap.org/data/2.5/weather?lat=${ lat }&lon=${ lon }`,
+                params: this.paramsOpenWeather
+            })
+            
+            const resp = await instance.get();
 
-        
-    } 
+            return {
+                desc: resp.data.weather[0].description,
+                min: resp.data.main.temp_min,
+                max: resp.data.main.temp_max,
+                temp: resp.data.main.temp
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 
 

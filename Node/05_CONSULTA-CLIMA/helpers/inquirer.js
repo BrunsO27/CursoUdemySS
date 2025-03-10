@@ -75,7 +75,7 @@ const listarLugares = async (lugares = []) => {
         const idx = `${i + 1}.`.brightYellow
         return {
             value: lugares.id,
-            name: `${idx}. ${lugares.nombre}`
+            name: `${idx} ${lugares.nombre}`
         }
     });
 
