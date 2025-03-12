@@ -12,5 +12,5 @@ node_modules/
 #de las busquedas de la app CONSULTA-CLIMA
 **/DB/db.json
 
-#Ignora las variables de entorno de la app CONSULTA-CLIMA
-**/05_CONSULTA-CLIMA/.env
+#Ignora las variables de entorno
+**/.env
