@@ -11,5 +11,6 @@ node_modules/
 #Ignora el archivo db.jon donde se guarda el historial
 #de las busquedas de la app CONSULTA-CLIMA
 **/DB/db.json
-#Ignora las variables de entorno
-**/.env
+
+#Ignora las variables de entorno de la app CONSULTA-CLIMA
+**/05_CONSULTA-CLIMA/.env
