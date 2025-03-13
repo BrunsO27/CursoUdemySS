@@ -1,14 +1,25 @@
-const { response } = require('express')
+const { response } = require('express');
+const { request } = require('express');
 
-const usuariosGet = (req,res = response) => {
+const usuariosGet = (req = request,res = response) => {
+
+    const {q, nombre='No name', apikey='No api key'} = req.query;
+
     res.json({
-        msg: 'Petición get a mi api - Controlador'
+        msg: 'Petición get a mi api - Controlador',
+        q,
+        nombre,
+        apikey
     });
 }
 
 const usuariosPut = (req,res) => {
+
+    const id = req.params.id
+
     res.status(400).json({
-        msg: 'Petición put a mi api - Controlador'
+        msg: 'Petición put a mi api - Controlador',
+        id
     });
 }
 
