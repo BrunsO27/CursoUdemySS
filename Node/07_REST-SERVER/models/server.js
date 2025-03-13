@@ -7,6 +7,8 @@ class Server {
         this.port = process.env.PORT
         this.usersPath = '/api/users'
 
+        // Conectar a base de datos
+
         // Middlawares
         this.middlewares();
 
