@@ -13,8 +13,13 @@ const usuariosPut = (req,res) => {
 }
 
 const usuariosPost = (req,res) => {
+
+    const { nombre, edad } = req.body;
+
     res.status(201).json({
-        msg: 'Petición post a mi api - Controlador'
+        msg: 'Petición post a mi api - Controlador',
+        nombre,
+        edad
     });
 }
 
