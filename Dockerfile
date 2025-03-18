@@ -5,10 +5,10 @@ RUN apt-get update && apt-get install -y \
     curl \
     bash \
     inotify-tools \
-    tree
+    tree 
 
 # Instalar NVM
-ENV NVM_DIR /root/.nvm
+ENV NVM_DIR=/root/.nvm
 RUN curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 
 # Cargar NVM y establecer una versión predeterminada de Node.js
