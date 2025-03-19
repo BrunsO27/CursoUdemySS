@@ -13,6 +13,8 @@ CREATE TABLE IF NOT EXISTS usuarios (
     estado BOOLEAN DEFAULT TRUE
 );
 
+ALTER TABLE usuarios AUTO_INCREMENT = 1;
+
 -- Tabla de Categorías
 CREATE TABLE IF NOT EXISTS categorias (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -20,6 +22,9 @@ CREATE TABLE IF NOT EXISTS categorias (
     usuario_id INT,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE SET NULL
 );
+
+ALTER TABLE categorias AUTO_INCREMENT = 1;
+
 
 -- Tabla de Productos
 CREATE TABLE IF NOT EXISTS productos (
@@ -32,3 +37,6 @@ CREATE TABLE IF NOT EXISTS productos (
     FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE SET NULL,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE SET NULL
 );
+
+ALTER TABLE productos AUTO_INCREMENT = 1;
+
