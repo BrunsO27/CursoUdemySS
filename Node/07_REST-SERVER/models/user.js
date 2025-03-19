@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const dbCafe = require('../database/config');
+const {dbCafe} = require('../database/config');
 
 const Usuario = dbCafe.define('usuarios', {
     id: {
