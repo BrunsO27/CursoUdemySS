@@ -24,9 +24,12 @@ const Usuario = dbCafe.define('usuarios', {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
     },
-    role: {
-        type: DataTypes.ENUM('admin','user'),
-        defaultValue: 'user',
+    role_id: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'roles',
+            key: 'id'
+        }
     },
     img: {
         type: DataTypes.STRING,
@@ -39,6 +42,19 @@ const Usuario = dbCafe.define('usuarios', {
 {
     freezeTableName: true,
     timestamps: false,
-})
+});
+
+// Asegurar que el método toJSON funcione correctamente
+Usuario.prototype.toJSON = function () {
+    return {
+        id: this.id,
+        nombre: this.nombre,
+        email: this.email,
+        role_id: this.role_id,
+        img: this.img,
+        google: this.google,
+        estado: this.estado
+    };
+};
 
 module.exports = Usuario;

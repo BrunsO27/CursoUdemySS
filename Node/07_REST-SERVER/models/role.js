@@ -7,7 +7,7 @@ const Role = dbCafe.define('roles', {
         autoIncrement: true,
         primaryKey: true,
     },
-    rol: {
+    role: {
         type: DataTypes.STRING(20),
         allowNull: false,
     }
@@ -16,3 +16,5 @@ const Role = dbCafe.define('roles', {
     freezeTableName: true,
     timestamps: false,
 })
+
+module.exports = Role;

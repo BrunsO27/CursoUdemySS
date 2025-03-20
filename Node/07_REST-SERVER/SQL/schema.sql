@@ -1,5 +1,20 @@
+DROP DATABASE IF EXISTS tienda;
+
 CREATE DATABASE IF NOT EXISTS tienda;
 USE tienda;
+
+-- Tabla de roles (se debe crear antes porque `usuarios` depende de ella)
+CREATE TABLE IF NOT EXISTS roles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    role VARCHAR(20) BINARY NOT NULL
+);
+
+ALTER TABLE roles AUTO_INCREMENT = 1;
+
+-- Insertar roles
+INSERT INTO `roles` (`id`, `role`) VALUES ('1', 'ADMIN');
+INSERT INTO `roles` (`id`, `role`) VALUES ('2', 'SELLER');
+INSERT INTO `roles` (`id`, `role`) VALUES ('3', 'USER');
 
 -- Tabla de Usuarios
 CREATE TABLE IF NOT EXISTS usuarios (
@@ -8,9 +23,10 @@ CREATE TABLE IF NOT EXISTS usuarios (
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     google BOOLEAN DEFAULT FALSE,
-    role ENUM('admin', 'user') DEFAULT 'user',
+    role_id INT,  -- Se renombró 'id' a 'role_id' para evitar conflicto
     img VARCHAR(255),
-    estado BOOLEAN DEFAULT TRUE
+    estado BOOLEAN DEFAULT TRUE,
+    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE SET NULL
 );
 
 ALTER TABLE usuarios AUTO_INCREMENT = 1;
@@ -38,13 +54,3 @@ CREATE TABLE IF NOT EXISTS productos (
 );
 
 ALTER TABLE productos AUTO_INCREMENT = 1;
-
-CREATE TABLE IF NOT EXISTS roles (
-    id INT AUTO INCREMENT PRIMARY KEY,
-    role VARCHAR(20) NOT NULL
-);
-
-ALTER TABLE roles AUTO_INCREMENT = 1;
-
-
-
