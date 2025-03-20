@@ -3,7 +3,8 @@ const { check } = require('express-validator');
 
 const validarCampos = require('../middlewares/validar-campos');
 const { esRoleValido,
-        existeEmail } = require('../helpers/db-validators');
+        existeEmail,
+        existeIdUsuario } = require('../helpers/db-validators');
 
 const { usuariosGet, 
         usuariosPut, 
@@ -17,7 +18,12 @@ const router = Router();
 
 router.get('/', usuariosGet );
 
-router.put('/:id', usuariosPut);
+router.put('/:id', [
+        check('id', 'No es un ID válido').isInt().toInt(),
+        check('id').custom( existeIdUsuario ),
+        check('role').optional().custom( esRoleValido ),
+        validarCampos
+],usuariosPut);
 
 router.post('/', [
         check('nombre', 'El nombre es obligatorio').not().isEmpty(),

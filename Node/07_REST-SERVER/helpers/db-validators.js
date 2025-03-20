@@ -13,6 +13,14 @@ const esRoleValido = async(rol = '' ) => {
     }
 }
 
+const existeIdUsuario = async( id = 0 ) => {
+    const existe = await Usuario.findByPk(id);
+
+    if (!existe) {
+        throw new Error(`El usuario con id ${id} no existe`);
+    }
+}
+
 const existeEmail = async( email = '') => {
     const exiteMail = await Usuario.findOne({
         where: {
@@ -27,5 +35,6 @@ const existeEmail = async( email = '') => {
 
 module.exports = {
     esRoleValido,
-    existeEmail
+    existeEmail,
+    existeIdUsuario
 }

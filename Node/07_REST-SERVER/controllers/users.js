@@ -17,13 +17,34 @@ const usuariosGet = (req = request,res = response) => {
     });
 }
 
-const usuariosPut = (req,res) => {
+const usuariosPut = async (req,res) => {
 
-    const id = req.params.id
+    const id = req.params.id;
+    const { id: _,password, google, email, role, ...resto } = req.body;
 
-    res.status(400).json({
+    // TODO validar contra base de datos
+
+    if ( password ) {
+        const salt = bcryptjs.genSaltSync();
+        resto.password = bcryptjs.hashSync(password, salt);
+    }
+
+    if ( role ) {
+        const roleId = await Role.findOne({ 
+            where : {
+                role
+            }
+        }); 
+
+        resto.role_id = roleId.id;
+    }
+
+    const usuario = await Usuario.findByPk(id);
+    await usuario.update(resto);
+
+    res.json({
         msg: 'Petición put a mi api - Controlador',
-        id
+        usuario
     });
 }
 
