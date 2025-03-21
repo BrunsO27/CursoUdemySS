@@ -110,9 +110,17 @@ const usuariosPost = async(req,res) => {
     });
 }
 
-const usuariosDelete = (req,res) => {
+const usuariosDelete = async (req,res) => {
+    const { id } = req.params;
+
+    // Físicamente lo borramos
+    /* const usuario = await Usuario.findByPk(id);
+    await usuario.destroy(); */
+
+    const usuario = await Usuario.findByPk(id);
+    await usuario.update({estado: false});
     res.json({
-        msg: 'Petición delete a mi api - Controlador'
+        usuario
     });
 }
 

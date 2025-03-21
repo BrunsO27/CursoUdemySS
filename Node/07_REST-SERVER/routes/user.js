@@ -39,7 +39,11 @@ router.post('/', [
         validarCampos
 ], usuariosPost);
 
-router.delete('/', usuariosDelete);
+router.delete('/:id', [
+        check('id', 'No es un ID válido').isInt().toInt(),
+        check('id').custom( existeIdUsuario ),
+        validarCampos
+],usuariosDelete);
 
 router.patch('/', usuariosPath);
 
