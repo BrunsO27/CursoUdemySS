@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { check } = require('express-validator');
+const { check, query } = require('express-validator');
 
 const validarCampos = require('../middlewares/validar-campos');
 const { esRoleValido,
@@ -16,7 +16,11 @@ const router = Router();
 
 
 
-router.get('/', usuariosGet );
+router.get('/', [
+        query('limite', 'El límite tiene que ser un número positivo').optional().isInt({min: 1}),
+        query('desde', 'El número de página tiene que ser un número positivo').optional({min: 0}).isInt(),
+        validarCampos
+],usuariosGet );
 
 router.put('/:id', [
         check('id', 'No es un ID válido').isInt().toInt(),

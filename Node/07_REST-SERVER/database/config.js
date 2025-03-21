@@ -7,6 +7,7 @@ const dbCafe = new Sequelize(process.env.DB_NAME,
                              {
     host: 'localhost',
     dialect: 'mysql',
+    logging: false,
 });
 
 module.exports = {

@@ -5,15 +5,43 @@ const bcryptjs = require('bcrypt');
 const Usuario = require('../models/user');
 const Role = require('../models/role');
 
-const usuariosGet = (req = request,res = response) => {
+const usuariosGet = async (req = request,res = response) => {
 
-    const {q, nombre='No name', apikey='No api key'} = req.query;
+    // const {q, nombre='No name', apikey='No api key'} = req.query;
+
+    const { limite = 5, desde = 0} = req.query;
+    /* const usuarios = await Usuario.findAll({
+        limit: Number(limite),
+        offset: Number(desde),
+        where: {
+            estado: true
+        },
+    });
+
+    const total = await Usuario.count({
+        where: {
+            estado: true
+        }
+    }); */
+
+    const [ total, usuarios] = await Promise.all([
+        Usuario.count({
+            where: {
+                estado: true
+            }
+        }),
+        Usuario.findAll({
+            limit: Number(limite),
+            offset: Number(desde),
+            where: {
+                estado: true
+            },
+        }),
+    ])
 
     res.json({
-        msg: 'Petición get a mi api - Controlador',
-        q,
-        nombre,
-        apikey
+        total,
+        usuarios,
     });
 }
 
