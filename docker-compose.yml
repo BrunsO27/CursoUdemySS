@@ -5,46 +5,52 @@ services:
     build: .
     container_name: curso-node
     ports:
-      - "3030:3030"  # Exponer Node en el puerto 8080
+      - "3030:3030"
     volumes:
-      - ./:/app      # Monta todas las carpetas dentro de Capitulos en /app
+      - ./:/app
     working_dir: /app
     stdin_open: true
     tty: true
     networks:
       - curso-network
+
   mysql:
-    image: mysql/mysql-server:8.0
+    image: mysql:latest
     container_name: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: tienda
-      MYSQL_USER: root
-      MYSQL_PASSWORD: rootpassword
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
     volumes:
-      - ./mysql:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
       - ./Node/07_REST-SERVER/SQL/schema.sql:/docker-entrypoint-initdb.d/schema.sql
     ports:
       - "3306:3306"
     networks:
       - curso-network
-  
+
   phpmyadmin:
     image: phpmyadmin:latest
     container_name: phpmyadmin
     restart: always
     ports:
-      - "8080:80"  # Accederás a phpMyAdmin en http://localhost:8080
+      - "8080:80"
     environment:
       PMA_ARBITRARY: 1
       PMA_HOST: mysql
-      PMA_USER: root
-      PMA_PASSWORD: rootpassword
+      PMA_USER: admin
+      PMA_PASSWORD: admin
+      MYSQL_SSL_MODE: DISABLED
     depends_on:
       - mysql
     networks:
       - curso-network
-  
+
 networks:
   curso-network:
-    driver: bridge  
+    name: curso-network
+    driver: bridge
+
+volumes:
+  mysql_data: {}

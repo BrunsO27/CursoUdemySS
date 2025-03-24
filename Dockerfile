@@ -1,3 +1,4 @@
+# Usa una imagen base de Ubuntu
 FROM ubuntu:latest
 
 # Instalar dependencias necesarias
@@ -5,17 +6,30 @@ RUN apt-get update && apt-get install -y \
     curl \
     bash \
     inotify-tools \
-    tree 
+    tree \
+    git \
+    build-essential
 
-# Instalar NVM
-ENV NVM_DIR=/root/.nvm
-RUN curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+COPY . /app
 
-# Cargar NVM y establecer una versión predeterminada de Node.js
-RUN bash -c "source /root/.nvm/nvm.sh && nvm install 16 && nvm install 18 && nvm use 18"
+# Instalar Node Version Manager (NVM)
+ENV NVM_DIR /root/.nvm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 
-# Crear directorio de la aplicación
+# Instalar Node.js y npm usando NVM
+RUN bash -c "source /root/.nvm/nvm.sh && nvm install 16 && nvm alias default 16"
+
+# Configurar el PATH para que Node.js y npm estén disponibles globalmente
+ENV PATH="/root/.nvm/versions/node/v16.20.2/bin:$PATH"
+
+# Corregir permisos del binario de Node.js
+RUN chmod +x /root/.nvm/versions/node/v16.20.2/bin/node
+
+# Instalar nodemon globalmente
+RUN npm install -g nodemon
+
+# Crear un directorio de trabajo genérico
 WORKDIR /app
 
-# Comando para vigilar cambios en los archivos y ejecutarlos automáticamente
-CMD ["/bin/bash"]
+# Comando predeterminado para iniciar una sesión interactiva
+CMD ["bash"]
