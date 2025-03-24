@@ -9,11 +9,16 @@ Facultad de Quimica, UNAM.
 Estos proyectyos se desarrollaron de manera paralela en en equipo con las tecnologias requeridas instaladas
 de manera nativa y en contenedores de Docker para evitar instalaciones en otros equipos de computo.
 
+Trabajando en un equipo con las tecnologias instaladas, algunas bibliotecas discrepan con las que estan 
+instaladas en los contenedores, como la bcrypt y bcryptjs.
+
 ## Tecnologias Usadas
 
 1. Node.js version 18 y 16.
 2. NPM
 3. NVM 
+4. MySQL
+5. PhpMyAdmin
 
 ## 🐳 Comandos para Docker y Docker Compose
 
