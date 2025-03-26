@@ -7,7 +7,12 @@
 </head>
 <body>
     
-    <div id="myApp"></div>
+    <div id="myApp">
+        <h3>{{ message }}</h3>
+        <blockquote>- {{ author }}</blockquote>
+
+        <button v-on:click="changeQuote">Cambiar mensaje</button>
+    </div>
     
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="app.js"></script>
