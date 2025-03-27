@@ -14,7 +14,11 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue';
 
-const contador = ref(2);
+const props = defineProps({
+  value: {type: Number, required: true}
+});
+
+const contador = ref(props.value);
 const contadorCuadrado = computed(() => contador.value * contador.value);
 
 const aumentaContador = () => {

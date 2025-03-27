@@ -2,7 +2,7 @@
   <h1>Mi primera app de Vue</h1>
   <hr />
 
-  <Counter />
+  <Counter :value="5" />
 </template>
 
 <script lang="ts" setup>
