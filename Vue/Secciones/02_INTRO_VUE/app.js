@@ -9,15 +9,21 @@ const quotes = [
 ];
 
 
-const { createApp } = Vue;
+const { createApp, ref } = Vue;
 
 
 const app = createApp({
     setup() {
+        const showAuthor = ref(true);
 
+        const toogleAuthor = () => {
+            showAuthor.value = !showAuthor.value
+        }
 
         return {
-            quotes
+            quotes,
+            showAuthor,
+            toogleAuthor,
         }
     }
 });
