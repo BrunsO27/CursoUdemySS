@@ -14,8 +14,9 @@ const { createApp, ref, computed } = Vue;
 
 const app = createApp({
     setup() {
-        const showAuthor = ref(true);
-        const quotes = ref(originalQuotes)
+        const showAuthor = ref(false);
+        const quotes = ref(originalQuotes);
+        const newMessage = ref('');
         const totalQuotes = computed(() => {
             return quotes.value.length;
         });
@@ -25,12 +26,19 @@ const app = createApp({
         }
 
         const addQuote = () => {
-            quotes.value.unshift({quote: 'hola mundo',author: 'Bruno Ortiz'})
+            // Se pueden añadir validaciones
+
+            quotes.value.unshift({quote: newMessage.value,
+                                  author: 'Bruno Ortiz'})
+
+            newMessage.value = ''
         }
 
         return {
             quotes,
-            showAuthor,
+            showAuthor, 
+            newMessage,
+
 
             toogleAuthor,
             addQuote, 
