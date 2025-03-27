@@ -1,26 +1,10 @@
 <template>
-  <section>
-    <h3>Contador: {{ contador }}</h3>
-    <h3>Cuadrardo: {{ contadorCuadrado }}</h3>
+  <h1>Mi primera app de Vue</h1>
+  <hr />
 
-    <div>
-      <button @click="aumentaContador">+1</button>
-      <button @click="decrementaContador">-1</button>
-    </div>
-  </section>
+  <Counter />
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
-
-const contador = ref(2);
-const contadorCuadrado = computed(() => contador.value * contador.value);
-
-const aumentaContador = () => {
-  contador.value++;
-};
-
-const decrementaContador = () => {
-  contador.value--;
-};
+import Counter from './components/Counter.vue';
 </script>
