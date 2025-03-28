@@ -81,7 +81,7 @@ instaladas en los contenedores, como la bcrypt y bcryptjs.
 | Eliminar todos los contenedores, imágenes y volúmenes | `docker system prune -a --volumes -f` |
 
 
-## 🐳 Comandos para Docker y Docker Compose de NODE
+## 🐳 Comandos para Docker y Docker Compose de VUE
 ### 🔹 1. Construir los contenedores  
 | Acción | Comando |
 |--------|---------|
