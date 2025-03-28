@@ -22,6 +22,7 @@ const {contador,
        aumentaContador,
        decrementaContador} = useCounter(props.value);
 
+//Antes de Composable Functions
 /* import { computed, ref } from 'vue';
 
 const props = defineProps({

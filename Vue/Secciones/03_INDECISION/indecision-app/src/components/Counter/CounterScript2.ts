@@ -1,3 +1,5 @@
+import { useCounter } from '../../composables/useCounter';
+
 import { computed, defineComponent, ref } from 'vue';
 
 export default defineComponent({
@@ -5,7 +7,13 @@ export default defineComponent({
     value: {type: Number, required: true},
   },
   setup(props) {
-    const contador = ref(props.value);
+
+    const {contador, 
+           contadorCuadrado, 
+           aumentaContador, 
+           decrementaContador} = useCounter(props.value);
+    //Antes de Composable Functions
+    /* const contador = ref(props.value);
     const contadorCuadrado = computed(() => contador.value * contador.value);
 
     const aumentaContador = () => {
@@ -14,7 +22,7 @@ export default defineComponent({
 
     const decrementaContador = () => {
       contador.value--;
-    };
+    }; */
 
     return {
       contador,
