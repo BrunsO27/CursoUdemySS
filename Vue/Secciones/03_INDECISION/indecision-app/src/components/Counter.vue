@@ -1,4 +1,3 @@
-
 <template>
   <section>
     <h3>Contador: {{ contador }}</h3>
@@ -15,7 +14,7 @@
 import { computed, ref } from 'vue';
 
 const props = defineProps({
-  value: {type: Number, required: true}
+  value: {type: Number, required: true},
 });
 
 const contador = ref(props.value);
