@@ -4,8 +4,8 @@
     <h3>Cuadrardo: {{ contadorCuadrado }}</h3>
 
     <div>
-      <button @click="aumentaContador">+1</button>
-      <button @click="decrementaContador">-1</button>
+      <button class="btn" @click="aumentaContador">+1</button>
+      <button class="btn" @click="decrementaContador">-1</button>
     </div>
   </section>
 </template>
@@ -40,3 +40,25 @@ const decrementaContador = () => {
   contador.value--;
 }; */
 </script>
+
+<style scoped>
+
+/* .btn {
+  @apply p-5;
+} */
+
+/* .btn{
+  margin: 10px;
+  padding: 2%;
+  background-color: var(--color-blue-500);
+  &:hover{
+    background-color: var(--color-blue-700);
+  }
+} */
+
+.btn {
+  @apply bg-blue-500 rounded-lg hover:bg-blue-700;
+  padding: 2%;
+}
+
+</style>
