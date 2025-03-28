@@ -41,24 +41,19 @@ const decrementaContador = () => {
 }; */
 </script>
 
-<style scoped>
+<style>
 
 /* .btn {
   @apply p-5;
 } */
 
-/* .btn{
-  margin: 10px;
-  padding: 2%;
+.btn{
+  padding: 1.25rem;
+  border-radius: 0.375rem;
+  margin-right: 0.5rem; 
   background-color: var(--color-blue-500);
   &:hover{
     background-color: var(--color-blue-700);
   }
-} */
-
-.btn {
-  @apply bg-blue-500 rounded-lg hover:bg-blue-700;
-  padding: 2%;
 }
-
 </style>
