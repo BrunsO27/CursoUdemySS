@@ -11,7 +11,18 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue';
+import { useCounter } from '../composables/useCounter';
+
+const props = defineProps({
+  value: {type: Number, required: true},
+});
+
+const {contador, 
+       contadorCuadrado,
+       aumentaContador,
+       decrementaContador} = useCounter(props.value);
+
+/* import { computed, ref } from 'vue';
 
 const props = defineProps({
   value: {type: Number, required: true},
@@ -26,5 +37,5 @@ const aumentaContador = () => {
 
 const decrementaContador = () => {
   contador.value--;
-};
+}; */
 </script>
