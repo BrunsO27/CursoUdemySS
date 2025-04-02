@@ -1,9 +1,13 @@
+import NotFound404 from '@/modules/common/pages/NotFound404.vue'
 import HomePage from '@/modules/landing/pages/HomePage.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+
+
+    //Landing
     {
       path: '/',
       name: 'landing',
@@ -48,6 +52,11 @@ export const router = createRouter({
         }
       ]
     },
+    {
+      path: '/:pathMatch(.*)*', 
+      name: 'NotFound', 
+      component: NotFound404,
+    }
   ],
 })
 
