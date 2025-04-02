@@ -1,24 +1,33 @@
 <template>
-  <!--  <link href="/src/styles.css" rel="stylesheet">
-  
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1> -->
+  <div class="flex flex-col h-screen">
+    <!-- Header -->
+    <header class="flex items-center h-14 px-4 border-b border-gray-300 sm:h-16 md:px-6 lg:px-8">
+      <div>
+        <a class="flex items-center gap-2 font-semibold" href="#">
+          <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="40" height="40" />
+        </a>
+      </div>
+      <nav class="ml-auto space-x-4 flex items-center h-10 sm:space-x-6">
+        <RouterLink to="/"> Home </RouterLink>
+        <RouterLink to="/features"> Features </RouterLink>
+        <RouterLink to="/pricing"> Pricing </RouterLink>
+        <RouterLink to="/contact"> Contact </RouterLink>
+      </nav>
+    </header>
+    <!-- Fin Header -->
 
-  <!--  <HomePage /> -->
+    <!-- Main -->
+    <main class="flex-1 flex items-center justify-center py-6">
+      <RouterView />
+    </main>
+    <!-- Fin Main -->
 
-  <nav>
-    <a href="#/">Home</a>
-    <a href="#/features">Features</a>
-    <a href="#/pricing">Princing</a>
-    <a href="#/contact">Contact</a>
-  </nav>
-
-  <main class="bg-slate-100">
-    <RouterView />
-  </main>
+    <!-- Footer -->
+    <footer class="flex items-center h-14 px-4 border-t border-gray-300 sm:h-16 md:px-6 lg:px-8">
+      <p class="flex-1 text-sm text-gray-500 text-center">
+        © {{ new Date().getFullYear() }} Acme Corporation. Derechos reservados
+      </p>
+    </footer>
+    <!-- Fin Footer -->
+  </div>
 </template>
-
-<script lang="ts" setup>
-/* import HomePage from './modules/landing/pages/HomePage.vue'; */
-</script>
