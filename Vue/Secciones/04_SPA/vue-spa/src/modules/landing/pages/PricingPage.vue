@@ -1,3 +1,3 @@
 <template>
-    <h1>PricingPage Page</h1>
+    <h1>Pricing Page</h1>
 </template>
