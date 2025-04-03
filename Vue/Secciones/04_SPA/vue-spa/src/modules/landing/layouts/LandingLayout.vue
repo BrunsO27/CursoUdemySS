@@ -9,8 +9,8 @@
       </div>
       <nav class="flex flex-col ml-auto space-x-4 items-end h-10 sm:space-x-6">
         <div class="space-x-4">
-          <RouterLink :to="{ name: 'home' }"> Home </RouterLink>
-          <RouterLink to="/features"> Features </RouterLink>
+          <RouterLink :to="{ name: 'home' }" > Home </RouterLink>
+          <RouterLink to="/features" > Features </RouterLink>
           <RouterLink to="/contact"> Contact </RouterLink>
           <RouterLink to="/pricing"> Pricing </RouterLink>
         </div>
