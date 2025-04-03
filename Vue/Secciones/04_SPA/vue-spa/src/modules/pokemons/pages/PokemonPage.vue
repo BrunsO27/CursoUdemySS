@@ -35,7 +35,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-console.log({
+/* console.log({
   id: props.id,
-})
+}) */
 </script>

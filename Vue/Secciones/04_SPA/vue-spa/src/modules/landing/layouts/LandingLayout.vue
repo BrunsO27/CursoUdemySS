@@ -13,7 +13,6 @@
           <RouterLink to="/features"> Features </RouterLink>
           <RouterLink to="/contact"> Contact </RouterLink>
           <RouterLink to="/pricing"> Pricing </RouterLink>
-
         </div>
 
         <div class="space-x-4">
@@ -26,7 +25,13 @@
 
     <!-- Main -->
     <main class="flex-1 flex items-center justify-center">
-      <RouterView />
+      <router-view v-slot="{ Component }">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </router-view>
+
+      <!-- <RouterView /> -->
     </main>
     <!-- Fin Main -->
 
