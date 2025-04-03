@@ -17,8 +17,8 @@
         </div>
 
         <div class="space-x-4">
-          <RouterLink to="/auth"> Login </RouterLink>
           <RouterLink to="/pokemon/1"> Pokemon </RouterLink>
+          <RouterLink to="/auth"> Login </RouterLink>
         </div>
       </nav>
     </header>
