@@ -5,8 +5,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 export const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-
-
     //Landing
     {
       path: '/',
@@ -36,7 +34,13 @@ export const router = createRouter({
         {
           path: '/pokemon/:id',
           name: 'pokemon',
-          props: true,
+          //props: true,
+          props: (route) => {
+            //console.log(route)
+
+            const id = Number(route.params.id);
+            return isNaN(id) ? { id: 1 } : { id };
+          },
           component: () => import('@/modules/pokemons/pages/PokemonPage.vue'),
         },
       ],
@@ -55,14 +59,14 @@ export const router = createRouter({
         {
           path: '/register',
           component: () => import('@/modules/aut/pages/RegisterPage.vue'),
-        }
-      ]
+        },
+      ],
     },
     {
-      path: '/:pathMatch(.*)*', 
-      name: 'NotFound', 
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
       component: NotFound404,
-    }
+    },
   ],
 })
 

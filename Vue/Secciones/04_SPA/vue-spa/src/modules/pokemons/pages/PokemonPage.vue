@@ -18,12 +18,19 @@
     >
       Siguiente
     </RouterLink>
+
+    <RouterLink
+      class="bg-blue-500 text-white p-2 rounded mt-5 text-center hover:bg-blue-700"
+      :to="{ name: 'pokemon', params: { id: id - 1 } }"
+    >
+      Anteriror
+    </RouterLink>
   </section>
 </template>
 
 <script lang="ts" setup>
 interface Props {
-  id: number
+  id: number;
 }
 
 const props = defineProps<Props>()
