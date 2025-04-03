@@ -57,9 +57,11 @@ const onLogin = () => {
 
   localStorage.setItem('userId', 'ABC123');
   //console.log('login')
-  router.replace({
-    name: 'home',
-  })
+  const lastPaht = localStorage.getItem('lastPath') ?? '/'
+  /* router.replace({
+    //name: 'home',
+  }) */
+ router.replace(lastPaht);
 }
 
 </script>
