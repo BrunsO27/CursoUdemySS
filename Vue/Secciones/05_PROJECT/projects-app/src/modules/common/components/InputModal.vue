@@ -24,40 +24,51 @@
   </dialog>
 
   <div
-    v-if="open" 
-    class="modal-backdrop fixed top-0 left-0 z-0 bg-black opacity-50 w-screen h-screen"></div>
+    v-if="open"
+    class="modal-backdrop fixed top-0 left-0 z-0 bg-black opacity-50 w-screen h-screen"
+  ></div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, watch, nextTick } from 'vue';
 
 interface Props {
-    open: boolean,
-    title: string,
-    placeholder?: string,
-    subTitle?: string;
+  open: boolean;
+  title: string;
+  placeholder?: string;
+  subTitle?: string;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 const emits = defineEmits<{
-    close: [void];
-    value: [text: string];
+  close: [void];
+  value: [text: string];
 }>();
 
 const inputValue = ref('');
 const inputRef = ref<HTMLInputElement | null>(null);
 
-const submitValue = () => {
-    //console.log({value: inputValue.value})
-    if( !inputValue.value ) {
-        inputRef.value?.focus();
-        return;
+watch(
+  () => props.open,
+  async (open) => {
+    if (open) {
+      await nextTick();
+      inputRef.value?.focus();
     }
+  },
+);
 
-    emits('value', inputValue.value.trim());
-    emits('close');
+const submitValue = () => {
+  //console.log({value: inputValue.value})
+  if (!inputValue.value) {
+    inputRef.value?.focus();
+    return;
+  }
 
-    inputValue.value = '';
-}
+  emits('value', inputValue.value.trim());
+  emits('close');
+
+  inputValue.value = '';
+};
 </script>
