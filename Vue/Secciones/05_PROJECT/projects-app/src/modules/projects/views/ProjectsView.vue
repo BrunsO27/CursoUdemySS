@@ -11,11 +11,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="hover:bg-base-300">
-          <th>2</th>
-          <td>Hart Hagerty</td>
-          <td>Desktop Support Technician</td>
-          <td>Purple</td>
+        <tr
+          v-for="(project, index) in projectsStore.projectsList"
+          :key="project.id"
+          class="hover:bg-base-300"
+        >
+          <th>{{ index + 1 }}</th>
+          <td>{{ project.name }}</td>
+          <td>{{ project.tasks.length }}</td>
+          <td><progress class="progress progress-primary w-56" value="1" max="100"></progress></td>
         </tr>
       </tbody>
     </table>
@@ -24,7 +28,7 @@
   <InputModal
     :open="modalOpen"
     @close="modalOpen = false"
-    @value="onNewValue"
+    @value="projectsStore.addProject"
     placeholder="Ingrese el nombre del proyecto"
     title="Nuevo proyecto"
     subTitle="Dale un nombre a tu nuevo proyecto"
@@ -68,9 +72,14 @@ import { useProjectsStore } from '../stores/projects.store';
 const modalOpen = ref(false);
 const customModalOpen = ref(false);
 
-const projectStore = useProjectsStore();
+const projectsStore = useProjectsStore();
 
-const onNewValue = (projectNme: string) => {
-  console.log({ projectNme });
-};
+/* const onNewValue = (projectNme: string) => {
+  //console.log({ projectNme });
+  projectsStore.projectsList.push({
+    id: '3',
+    name: projectNme,
+    tasks: [],
+  });
+}; */
 </script>
