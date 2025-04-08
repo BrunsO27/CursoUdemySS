@@ -36,10 +36,11 @@ export const useProjectsStore = defineStore('projects', () => {
 
   return {
     // PropertiesS
-    //projects,
+    projects,
 
     // Getters
     projectsList: computed(() => [...projects.value]),
+    noProjects: computed(() => projects.value.length === 0),
 
     // Actions
     addProject,
