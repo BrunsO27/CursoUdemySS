@@ -17,8 +17,15 @@
           </thead>
           <tbody>
             <!-- row 2 -->
-            <tr v-for="(task, index) in project?.tasks" :key="task.id" class="hover:bg-base-300">
-              <th>{{ index + 1 }}</th>
+            <tr v-for="task in project?.tasks" :key="task.id" class="hover:bg-base-300">
+              <th>
+                <input
+                  type="checkbox"
+                  :checked="!!task.completedAt"
+                  class="checkbox checkbox-primary"
+                  @change="projectStore.toogleTask(project?.id ?? '', task.id)"
+                />
+              </th>
               <td>{{ task.name }}</td>
               <td>{{ task.completedAt || 'Pendiente' }}</td>
             </tr>

@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import type { Project } from '../interfaces/project.interface';
-import type { Task } from '../interfaces/project.interface';
 import { v4 as uuidv4 } from 'uuid';
 import { useLocalStorage } from '@vueuse/core';
 
@@ -45,8 +44,19 @@ export const useProjectsStore = defineStore('projects', () => {
     project?.tasks.push({
       id: uuidv4(),
       name: nameTask,
-      completedAt: new Date(),
+      //completedAt: new Date(),
     });
+  };
+
+  const toogleTask = (projecId: string, taskId: string) => {
+    const project = projects.value.find((project) => project.id === projecId);
+
+    if (!project) return;
+
+    const task = project.tasks.find((task) => task.id === taskId);
+    if (!task) return;
+
+    task.completedAt = task.completedAt ? undefined : new Date();
   };
 
   // const getTask = (projectId: string) => {
@@ -63,10 +73,25 @@ export const useProjectsStore = defineStore('projects', () => {
     // Getters
     projectsList: computed(() => [...projects.value]),
     noProjects: computed(() => projects.value.length === 0),
+    projectsWithCompletion: computed(() => {
+      return projects.value.map((project) => {
+        const total = project.tasks.length;
+        const completed = project.tasks.filter((task) => task.completedAt).length;
+        const completion = total === 0 ? 0 : (completed / total) * 100;
+
+        return {
+          id: project.id,
+          name: project.name,
+          taskCount: total,
+          completion: completion,
+        };
+      });
+    }),
     //getTask,
 
     // Actions
     addProject,
     addTaskToProject,
+    toogleTask,
   };
 });
