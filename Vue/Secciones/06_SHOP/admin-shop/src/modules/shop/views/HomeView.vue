@@ -91,7 +91,7 @@
 </template>
 
 <script lang="ts" setup>
-import { tesloApi } from '@/api/tesloApi';
+import { getProducts } from '@/modules/products/actions';
 
-tesloApi;
+getProducts();
 </script>
