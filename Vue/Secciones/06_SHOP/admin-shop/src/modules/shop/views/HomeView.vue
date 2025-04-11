@@ -109,12 +109,13 @@
 import ButtonPagination from '@/modules/common/components/ButtonPagination.vue';
 import { getProducts } from '@/modules/products/actions';
 import ProductList from '@/modules/products/components/ProductList.vue';
-import { useQuery } from '@tanstack/vue-query';
-import { ref, watch } from 'vue';
+import { useQuery, useQueryClient } from '@tanstack/vue-query';
+import { ref, watch, watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const page = ref(Number(route.query.page || 1));
+const queryClient = useQueryClient();
 
 const { data: products } = useQuery({
   queryKey: ['products', { page: page }],
@@ -125,6 +126,15 @@ watch(
   () => route.query.page,
   (newPage) => {
     page.value = Number(newPage || 1);
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   },
 );
+
+watchEffect(() => {
+  queryClient.prefetchQuery({
+    queryKey: ['products', { page: page.value + 1 }],
+    queryFn: () => getProducts(page.value + 1),
+  });
+});
 </script>
