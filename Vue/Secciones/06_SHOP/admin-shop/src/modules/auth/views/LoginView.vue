@@ -1,5 +1,4 @@
 <template>
-  <h1>Hola mundo</h1>
   <h1 class="text-2xl font-semibold mb-4">Login</h1>
   <form @submit.prevent="onLogin">
     <!-- Username Input -->
@@ -7,6 +6,7 @@
       <label for="email" class="block text-gray-600">Correo</label>
       <input
         v-model="myForm.email"
+        ref="emailInputRef"
         type="text"
         id="email"
         name="email"
@@ -19,6 +19,7 @@
       <label for="password" class="block text-gray-600">Contraseña</label>
       <input
         v-model="myForm.password"
+        ref="passwdInputRef"
         type="password"
         id="password"
         name="password"
@@ -51,18 +52,20 @@
   </form>
   <!-- Sign up  Link -->
   <div class="mt-6 text-blue-500 text-center">
-    <RouterLink :to="{ name: 'register' }" class="hover:underline">Sign up Here</RouterLink>
+    <RouterLink :to="{ name: 'register' }" class="hover:underline">Crear cuenta aqui</RouterLink>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue';
+import { reactive, ref, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/auth.store';
-
-const router = useRouter();
+import { useToast } from 'vue-toastification';
 
 const authStore = useAuthStore();
+const emailInputRef = ref<HTMLInputElement | null >(null);
+const passwdInputRef = ref<HTMLInputElement | null >(null);
+const toast = useToast();
 
 const myForm = reactive({
   email: '',
@@ -71,8 +74,36 @@ const myForm = reactive({
 });
 
 const onLogin = async () => {
-  const ok = await authStore.login(myForm.email, myForm.password);
+if ( myForm.email === '') {
+  return emailInputRef.value?.focus();
+}
 
-  console.log(ok);
+if ( myForm.password.length < 6) {
+  return passwdInputRef.value?.focus();
+}
+
+if (myForm.rememberMe) {
+  localStorage.setItem('email', myForm.email);
+} else {
+  localStorage.removeItem('email');
+}
+
+const ok = await authStore.login(myForm.email, myForm.password);
+
+if (ok) {
+ return; 
+}
+
+toast.error('Usuario/Contraseña no son correctos');
+  
 };
+
+watchEffect(() => {
+  const email = localStorage.getItem('email');
+
+  if (email) {
+    myForm.email = email;
+    myForm.rememberMe = true;
+  }
+})
 </script>
