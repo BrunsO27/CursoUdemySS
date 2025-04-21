@@ -3,6 +3,7 @@ import { defineStore } from 'pinia';
 import { AuthStatus, type User } from '../interfaces';
 import { loginAction } from '../actions';
 import { useLocalStorage } from '@vueuse/core';
+import { registerAction } from '../actions/register.action';
 
 export const useAuthStore = defineStore('auth', () => {
   // Authenticated, unAuthebticate, Checking
@@ -21,6 +22,7 @@ export const useAuthStore = defineStore('auth', () => {
       user.value = loginResponse.user;
       token.value = loginResponse.token;
       authStatus.value = AuthStatus.Authenticated;
+      
       return true;
     } catch (error) {
       console.log(error);
@@ -34,6 +36,28 @@ export const useAuthStore = defineStore('auth', () => {
     token.value = '';
     return false;
   };
+
+  const register = async (fullName: string, 
+                          email: string, 
+                          passwd: string) => {
+    const registerResponse = await registerAction(fullName, email, passwd);
+
+    try {
+      if (!registerResponse.ok) {
+        logout();
+        return false;
+      }
+
+      user.value = registerResponse.user;
+      token.value = registerResponse.token;
+      authStatus.value = AuthStatus.Authenticated;
+
+      return true;
+    } catch (error) {
+      console.log(error);
+      return logout();
+    }
+  }
 
   return {
     user,
@@ -51,5 +75,6 @@ export const useAuthStore = defineStore('auth', () => {
 
     // Actions
     login,
+    register,
   };
 });
