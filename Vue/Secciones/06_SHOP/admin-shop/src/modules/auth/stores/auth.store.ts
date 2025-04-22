@@ -88,11 +88,12 @@ export const useAuthStore = defineStore('auth', () => {
     isUnauthenticated: computed(() => authStatus.value === AuthStatus.Unauthenticated),
 
     // Todo: getter para saber si es admin o no
-
+    isAdmin: computed(() => user.value?.roles.includes('admin') ?? false),
     username: computed(() => user.value?.fullName),
 
     // Actions
     login,
+    logout,
     register,
     checkAuthStatus,
   };
