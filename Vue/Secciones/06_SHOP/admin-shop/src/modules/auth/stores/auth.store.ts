@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import { AuthStatus, type User } from '../interfaces';
-import { loginAction } from '../actions';
+import { checkAuthAction, loginAction } from '../actions';
 import { useLocalStorage } from '@vueuse/core';
 import { registerAction } from '../actions/register.action';
 
@@ -9,7 +9,7 @@ export const useAuthStore = defineStore('auth', () => {
   // Authenticated, unAuthebticate, Checking
   const authStatus = ref(AuthStatus.Checking);
   const user = ref<User | undefined>();
-  const token = ref( useLocalStorage('token', ''));
+  const token = ref(useLocalStorage('token', ''));
 
   const login = async (email: string, password: string) => {
     try {
@@ -22,7 +22,7 @@ export const useAuthStore = defineStore('auth', () => {
       user.value = loginResponse.user;
       token.value = loginResponse.token;
       authStatus.value = AuthStatus.Authenticated;
-      
+
       return true;
     } catch (error) {
       console.log(error);
@@ -37,9 +37,27 @@ export const useAuthStore = defineStore('auth', () => {
     return false;
   };
 
-  const register = async (fullName: string, 
-                          email: string, 
-                          passwd: string) => {
+  const checkAuthStatus = async (): Promise<boolean> => {
+    try {
+      const statusResp = await checkAuthAction();
+
+      if (!statusResp.ok) {
+        logout();
+        return false;
+      }
+
+      authStatus.value = AuthStatus.Authenticated;
+      user.value = statusResp.user;
+      token.value = statusResp.token;
+
+      return true;
+    } catch (error) {
+      logout();
+      return false;
+    }
+  };
+
+  const register = async (fullName: string, email: string, passwd: string) => {
     const registerResponse = await registerAction(fullName, email, passwd);
 
     try {
@@ -57,7 +75,7 @@ export const useAuthStore = defineStore('auth', () => {
       console.log(error);
       return logout();
     }
-  }
+  };
 
   return {
     user,
@@ -76,5 +94,6 @@ export const useAuthStore = defineStore('auth', () => {
     // Actions
     login,
     register,
+    checkAuthStatus,
   };
 });
