@@ -10,14 +10,14 @@ const isAdminGuard = async (
 
   await authStore.checkAuthStatus();
 
-  // authStore.isAdmin ? next({ name: 'home' }) : next();
+  authStore.isAdmin ? next() : next({ name: 'home' });
 
   // Mi solucion
-  if (authStore.isAdmin) {
+  /* if (authStore.isAdmin) {
     return next();
   }
 
-  return next({ name: 'home' });
+  return next({ name: 'home' }); */
 };
 
 export default isAdminGuard;
