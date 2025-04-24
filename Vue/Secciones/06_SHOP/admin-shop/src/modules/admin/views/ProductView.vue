@@ -56,9 +56,16 @@
 
       <div class="mb-4">
         <label for="sizes" class="form-label">Tallas</label>
-        <button type="button" class="bg-blue-100 p-2 rounded w-14 mr-2">XS</button>
-        <button type="button" class="bg-blue-500 text-white p-2 rounded w-14 mr-2">S</button>
-        <button type="button" class="bg-blue-500 text-white p-2 rounded w-14 mr-2">M</button>
+        <div class="flex">
+          <button
+            v-for="size of allSizes"
+            :key="size"
+            type="button"
+            class="bg-blue-100 p-2 rounded w-14 mr-2 flex-1"
+          >
+            {{ size }}
+          </button>
+        </div>
       </div>
     </div>
 
