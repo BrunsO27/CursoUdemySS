@@ -9,6 +9,8 @@
       <div class="mb-4">
         <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Título</label>
         <input
+          v-model="title"
+          v-bind="titleAttrs"
           type="text"
           id="title"
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
@@ -110,6 +112,15 @@
       </div>
     </div>
   </form>
+
+  <div class="grid grid-cols-2 mt-2">
+    <div class="bg-blue-200 p-2">
+      {{ values }}
+    </div>
+    <div class="bg-red-200 p-2">
+      {{ errors }}
+    </div>
+  </div>
 </template>
 
 <script src="./ProductView.ts" lang="ts"></script>
