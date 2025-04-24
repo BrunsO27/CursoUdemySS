@@ -8,22 +8,20 @@
     <div class="first-col">
       <div class="mb-4">
         <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Título</label>
-        <input
+        <CustomImput v-model="title" v-bind="titleAttrs" :error="errors.title" />
+
+        <!-- <input
           v-model="title"
           v-bind="titleAttrs"
           type="text"
           id="title"
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
-        />
+        /> -->
       </div>
 
       <div class="mb-4">
         <label for="slug" class="block text-gray-700 text-sm font-bold mb-2">Slug</label>
-        <input
-          type="text"
-          id="slug"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
-        />
+        <CustomImput v-model="slug" v-bind="slugAttrs" :error="errors.slug" />
       </div>
 
       <div class="mb-4">
@@ -39,20 +37,12 @@
       <div class="flex flex-row gap-3">
         <div class="mb-4">
           <label for="price" class="block text-gray-700 text-sm font-bold mb-2">Precio</label>
-          <input
-            type="number"
-            id="price"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
-          />
+          <CustomImput v-model.number="price" v-bind="priceAttrs" :error="errors.price" />
         </div>
 
         <div class="mb-4">
           <label for="stock" class="block text-gray-700 text-sm font-bold mb-2">Inventario</label>
-          <input
-            type="number"
-            id="stock"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
-          />
+          <CustomImput v-model.number="stock" v-bind="stockAttrs" :error="errors.stock" />
         </div>
       </div>
 

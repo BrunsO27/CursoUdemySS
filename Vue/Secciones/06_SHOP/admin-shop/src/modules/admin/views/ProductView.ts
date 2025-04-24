@@ -6,9 +6,10 @@ import * as yup from 'yup';
 
 import { getProductById } from '@/modules/products/actions';
 import type { Product } from '@/modules/products/interfaces/product.interface';
+import CustomImput from '@/modules/common/components/CustomImput.vue';
 
 const validationSchema = yup.object({
-  title: yup.string().required(),
+  title: yup.string().required().min(3),
   slug: yup.string().required(),
   description: yup.string().required(),
   price: yup.number().required(),
@@ -17,6 +18,10 @@ const validationSchema = yup.object({
 });
 
 export default defineComponent({
+  components: {
+    CustomImput,
+  },
+
   props: {
     productId: {
       type: String,
