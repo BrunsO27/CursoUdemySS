@@ -1,12 +1,12 @@
 <template>
   <div>
-    <input
+    <textarea
       :type="type"
       :value="modelValue"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement)?.value ?? '')"
       @blur="$emit('blur')"
-      :class="['form-control', { 'border-red-800': error }]"
-    />
+      :class="['form-control', { ' border-red-800': error }]"
+    ></textarea>
     <span class="text-red-400" v-if="error">{{ error }}</span>
   </div>
 </template>
@@ -15,7 +15,7 @@
 interface Props {
   modelValue?: string | number;
   error?: string;
-  type?: 'text' | 'number';
+  type?: 'text';
 }
 
 withDefaults(defineProps<Props>(), {
@@ -28,6 +28,7 @@ defineEmits(['update:modelValue', 'blur']);
 <style scoped>
 .form-control {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* shadow */
+  height: 8rem; /* h-32 */
   appearance: none; /* appearance-none */
   border: 1px solid #e2e8f0; /* border */
   border-radius: 0.25rem; /* rounded */
@@ -39,7 +40,8 @@ defineEmits(['update:modelValue', 'blur']);
 }
 
 .form-control:focus {
-  outline: 2px solid transparent;
+  outline: 2px solid transparent; /* focus:outline-none */
   outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5); /* focus:shadow-outline */
 }
 </style>
