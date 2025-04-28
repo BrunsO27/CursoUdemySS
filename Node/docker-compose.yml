@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  node_exercises:
+    build: .
+    container_name: curso-node
+    ports:
+      - "3030:3030"
+    volumes:
+      - ./:/app
+    working_dir: /app
+    stdin_open: true
+    tty: true
+    networks:
+      - curso-network
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tienda
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./Secciones/07_REST-SERVER/SQL/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    ports:
+      - "3306:3306"
+    networks:
+      - curso-network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: mysql
+      PMA_USER: admin
+      PMA_PASSWORD: admin
+      MYSQL_SSL_MODE: DISABLED
+    depends_on:
+      - mysql
+    networks:
+      - curso-network
+
+networks:
+  curso-network:
+    name: curso-network
+    driver: bridge
+
+volumes:
+  mysql_data: {}
