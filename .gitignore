@@ -16,6 +16,7 @@ node_modules/
 **/05_CONSULTA-CLIMA/.env
 **/06_WEB-SERVER/.env
 **/07_REST-SERVER/.env
+**/.env
 
 # Ignora el directorio mysql creado por docker
 mysql/
