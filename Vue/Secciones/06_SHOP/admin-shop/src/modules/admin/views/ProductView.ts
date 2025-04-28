@@ -1,11 +1,10 @@
-import { defineComponent, watchEffect } from 'vue';
+import { defineComponent, watch, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
 import { useQuery } from '@tanstack/vue-query';
 import { useFieldArray, useForm } from 'vee-validate';
 import * as yup from 'yup';
 
 import { getProductById } from '@/modules/products/actions';
-import type { Product } from '@/modules/products/interfaces/product.interface';
 import CustomImput from '@/modules/common/components/CustomImput.vue';
 import CustomTextArea from '@/modules/common/components/CustomTextArea.vue';
 
@@ -45,7 +44,7 @@ export default defineComponent({
       retry: false,
     });
 
-    const { values, defineField, errors, handleSubmit } = useForm({
+    const { values, defineField, errors, handleSubmit, resetForm } = useForm({
       validationSchema,
     });
 
@@ -79,6 +78,21 @@ export default defineComponent({
         router.replace('/admin/products');
       }
     });
+
+    watch(
+      product,
+      () => {
+        if (!product) return;
+
+        resetForm({
+          values: product.value,
+        });
+      },
+      {
+        deep: true,
+        immediate: true,
+      },
+    );
 
     return {
       // Properties
