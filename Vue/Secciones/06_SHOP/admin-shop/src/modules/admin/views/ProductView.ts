@@ -44,7 +44,7 @@ export default defineComponent({
       retry: false,
     });
 
-    const { values, defineField, errors, handleSubmit, resetForm } = useForm({
+    const { values, defineField, errors, handleSubmit, resetForm, meta } = useForm({
       validationSchema,
     });
 
@@ -98,6 +98,7 @@ export default defineComponent({
       // Properties
       values,
       errors,
+      meta,
 
       title,
       titleAttrs,

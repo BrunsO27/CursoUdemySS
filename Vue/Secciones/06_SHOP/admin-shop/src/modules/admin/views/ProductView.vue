@@ -114,9 +114,12 @@
     <pre class="bg-blue-200 p-2">
       {{ JSON.stringify(values, null, 2) }}
     </pre>
-    <div class="bg-red-200 p-2">
+    <pre class="bg-red-200 p-2">
       {{ JSON.stringify(errors, null, 2) }}
-    </div>
+    </pre>
+    <pre class="bg-green-200 p-2 col-span-2">
+      {{ JSON.stringify(meta, null, 2) }}
+    </pre>
   </div>
 </template>
 
