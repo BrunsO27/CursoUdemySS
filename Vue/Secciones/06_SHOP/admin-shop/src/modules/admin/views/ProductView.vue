@@ -1,6 +1,8 @@
 <template>
   <div class="bg-white px-5 py-2 rounded">
-    <h1 class="text-3xl">Producto: <small class="text-blue-500">nombre</small></h1>
+    <h1 class="text-3xl">
+      Producto: <small class="text-blue-500">{{ title }}</small>
+    </h1>
     <hr class="my-4" />
   </div>
 
@@ -36,12 +38,12 @@
       </div>
 
       <div class="flex flex-row gap-3">
-        <div class="mb-4">
+        <div class="mb-4 flex-1">
           <label for="price" class="block text-gray-700 text-sm font-bold mb-2">Precio</label>
           <CustomImput v-model.number="price" v-bind="priceAttrs" :error="errors.price" />
         </div>
 
-        <div class="mb-4">
+        <div class="mb-4 flex-1">
           <label for="stock" class="block text-gray-700 text-sm font-bold mb-2">Inventario</label>
           <CustomImput v-model.number="stock" v-bind="stockAttrs" :error="errors.stock" />
         </div>
@@ -55,7 +57,13 @@
             :key="size"
             @click="toggleSize(size)"
             type="button"
-            class="bg-blue-100 p-2 rounded w-14 mr-2 flex-1"
+            :class="[
+              'p-2 rounded w-14 mr-2 flex-1',
+              {
+                'bg-blue-500 text-white': hasSize(size),
+                'bg-blue-100 text-black': !hasSize(size),
+              },
+            ]"
           >
             {{ size }}
           </button>
